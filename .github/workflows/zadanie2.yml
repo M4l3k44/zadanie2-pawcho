@@ -28,6 +28,10 @@ jobs:
             type=semver,priority=200,pattern={{version}}
 
       -
+        name: Set lowercase owner
+        run: echo "OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      -
         name: QEMU set-up
         uses: docker/setup-qemu-action@v3
 
@@ -68,7 +72,7 @@ jobs:
         name: CVE scan with Trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ghcr.io/${{ github.actor }}/weather-app:${{ steps.meta.outputs.version }}
+          image-ref: ghcr.io/${{ env.OWNER }}/weather-app:${{ steps.meta.outputs.version }}
           scan-type: image
           format: table
           exit-code: '0'
