@@ -9,6 +9,10 @@ Wyłączono `latest=false` – brak automatycznego tagu latest.
 ## Cache
 Typ: `registry`, tryb: `max`, przechowywany na DockerHub: `jmalek623/weather-app-cache:cache`
 
+Tag `:cache` jest wymagany przy typie `registry` – parametr `ref` musi wskazywać
+konkretną lokalizację w rejestrze skąd builder pobiera i dokąd zapisuje warstwy cache.
+Tag jest nadpisywany przy każdym buildzie co zapewnia aktualność danych.
+
 ## CVE
 Skan wykonuje Trivy (`aquasecurity/trivy-action@v0.36.0`). 
 Obraz trafia na ghcr.io tylko gdy brak podatności CRITICAL/HIGH (`exit-code: 1`).
